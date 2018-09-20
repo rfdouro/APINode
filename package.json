@@ -1,0 +1,21 @@
+{
+ "name": "APINode",
+ "version": "1.0.0",
+ "keywords": [
+  "util",
+  "functional",
+  "server",
+  "client",
+  "browser"
+ ],
+ "author": "welton",
+ "contributors": [],
+ "dependencies": {
+  "express": "",
+  "sequelize": "",
+  "sqlite3": "^4.0.2"
+ },
+ "scripts": {
+  "start": "node server.js"
+ }
+}
