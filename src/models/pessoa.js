@@ -26,7 +26,7 @@ var Pessoa = function () {
  this.cadastra = function (dados, cbSucesso, cbErro) {
   var modelo = this.Modelo;
   //ver em http://docs.sequelizejs.com/manual/tutorial/transactions.html
-  this.con.transaction(function(t1){
+  this.con.transaction(function (t1) {
    return modelo.create(dados, t1).then(cbSucesso).catch(cbErro);
   });
  };
@@ -70,7 +70,7 @@ var Pessoa = function () {
    });
   }
  };
- 
+
  //recebe um id para pesquisa e uma função para ter o retorno dos dados
  this.selecionaAnimais = function (idC, funcao) {
   if (this.con != null) {
@@ -93,14 +93,20 @@ var Pessoa = function () {
  this.exclui = function (id, cbSucesso, cbErro) {
   if (this.con != null) {
    var modelo = this.Modelo;
+   console.log('typeof id');
+   console.log(typeof id);
+   console.log(typeof parseInt(id));
    this.con.sync().then(function () {
     modelo.destroy({
      where: {
-      id: {
-       $eq: id
-      }
+      id: id
      }
-    }).then(cbSucesso).catch(cbErro);
+    }).then(function (rowDeleted) { // rowDeleted will return number of rows deleted
+     if (rowDeleted === 1) {
+      console.log('Deleted successfully');
+      cbSucesso();
+     }
+    }).catch(cbErro);
    });
   }
  };

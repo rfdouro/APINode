@@ -89,13 +89,12 @@ var Animal = function () {
   */
  this.exclui = function (id, cbSucesso, cbErro) {
   if (this.con != null) {
+   console.log('---> ' + id);
    var modelo = this.Modelo;
    this.con.sync().then(function () {
     modelo.destroy({
      where: {
-      id: {
-       $eq: id
-      }
+      id: id
      }
     }).then(cbSucesso).catch(cbErro);
    });
